@@ -10,7 +10,27 @@
  */
 class Solution {
     public ListNode swapPairs(ListNode head) {
+        //RECURSION
         if(head == null || head.next == null){
+            return head;
+        } 
+
+        ListNode current = head;
+        ListNode nextNode = head.next;
+
+        current.next = swapPairs(nextNode.next);
+        nextNode.next = current;
+
+        return nextNode;
+      
+
+
+    }
+
+    /**
+    
+    ITERATIVE SOLUTTION
+      if(head == null || head.next == null){
             return head; //[],[1]
         }
 
@@ -39,7 +59,5 @@ class Solution {
         }
 
         return head;
-
-
-    }
+     */
 }
