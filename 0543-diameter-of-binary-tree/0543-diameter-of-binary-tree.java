@@ -41,8 +41,8 @@ class Solution {
 
         int pathWithRoot = leftPathLength+rightPathLength;  //2
 
-        diameterLength = Math.max(diameterLength, leftPathLength); //2
-        diameterLength = Math.max(diameterLength, rightPathLength);//2
+       // diameterLength = Math.max(diameterLength, leftPathLength); //2
+      //  diameterLength = Math.max(diameterLength, rightPathLength);//2
         diameterLength = Math.max(diameterLength, pathWithRoot);//2
   
         
