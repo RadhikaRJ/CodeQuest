@@ -8,10 +8,10 @@
  * }
  */
 class Solution {
-    TreeNode ans = null;
+    TreeNode lca = null;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         findLCA(root,p,q);
-        return ans;
+        return lca;
     }
 
     public boolean findLCA(TreeNode root, TreeNode p, TreeNode q){
@@ -19,15 +19,14 @@ class Solution {
             return false;
         }
 
-        int left = findLCA(root.left, p, q) ? 1 :0;
-        int right = findLCA(root.right,p,q) ? 1:0;
+        int left = findLCA(root.left, p, q)?1:0;
+        int right = findLCA(root.right, p, q)?1:0;
+        int mid = (root == p || root == q)?1:0;
 
-        int mid = (root == p || root == q) ? 1:0;
-
-        if(mid+left+right>=2){
-            ans = root;
+        if(mid+right+left >= 2){
+            lca = root;
         }
 
-        return (mid+left+right > 0);
+        return (left+right+mid > 0);
     }
 }
