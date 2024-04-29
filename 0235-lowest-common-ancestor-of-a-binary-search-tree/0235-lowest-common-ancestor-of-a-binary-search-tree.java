@@ -11,6 +11,38 @@
 class Solution {
     TreeNode lca = null;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        findLCAInBST(root, p, q);
+        return lca;
+    }
+
+    public void findLCAInBST(TreeNode root, TreeNode p, TreeNode q)
+    {
+        if(root == p || root == q){
+            lca = root;
+            return;
+        }
+        else 
+        {
+            if(root.val >= p.val && root.val<=q.val ||  root.val>=q.val && root.val<=p.val){
+                lca = root;
+                return;
+            }
+            else if(root.val>p.val && root.val > q.val){
+                findLCAInBST(root.left, p, q);
+            }
+            else{
+                findLCAInBST(root.right, p, q);
+            }
+
+        
+        }
+    }
+}
+
+    /**
+    Basic search alse works here (without binary search conditions)
+    TreeNode lca = null;
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         findLCA(root, p,q);
         return lca;
     }
@@ -29,4 +61,7 @@ class Solution {
 
         return (mid+left+right > 0);
     }
-}
+    
+    
+    
+     */
