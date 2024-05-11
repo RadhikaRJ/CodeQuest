@@ -1,36 +1,42 @@
 class Solution {
     public int calculate(String s) {
-        if(s==null || s.isEmpty()){
-            return 0;
-        }
+
+        if(s == null || s.isEmpty()) return 0;
 
         int len = s.length();
-        int currentNumber = 0, lastNumber = 0, result = 0;
-        char operator = '+';
+
+        char operation = '+';
+        Stack<Integer> stack = new Stack<>();
+        int currentNumber = 0;
 
         for(int i=0;i<len;i++){
             char currentChar = s.charAt(i);
             if(Character.isDigit(currentChar)){
-                currentNumber = (currentNumber*10)+(currentChar-'0');
+                currentNumber = (currentNumber*10)+(currentChar-'0'); //forming the number. Multiplication by 10 incase the number is greater than 9
             }
+            if(!Character.isDigit(currentChar) && !Character.isWhitespace(currentChar)|| i==len-1){
+              
+                if(operation == '+'||operation == '-'){
+                    stack.push((operation=='+')?currentNumber:-currentNumber);
+                }
+                else if(operation == '*'){
+                    stack.push(stack.pop()*currentNumber);
+                }
+                else if(operation == '/'){
+                    stack.push(stack.pop()/currentNumber);
+                }
 
-            if(!Character.isDigit(currentChar) && !Character.isWhitespace(currentChar) || i==len-1)
-            {
-                if(operator == '+' || operator =='-'){
-                    result+=lastNumber;
-                    lastNumber = (operator=='+')?currentNumber:-currentNumber;
-                }
-                else if(operator =='*'){
-                    lastNumber = lastNumber * currentNumber;
-                }
-                else if(operator == '/'){
-                    lastNumber = lastNumber/currentNumber;
-                }
-                operator = currentChar;
-                currentNumber=0;
+                operation = currentChar;
+                currentNumber = 0;
             }
         }
-        result+=lastNumber;
+
+        int result = 0;
+        while(!stack.isEmpty()){
+            result+=stack.pop();
+        }
+
         return result;
+
     }
 }
