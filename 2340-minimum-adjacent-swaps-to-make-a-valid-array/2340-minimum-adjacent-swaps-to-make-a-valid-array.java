@@ -16,8 +16,8 @@ class Solution {
         }
     }
 
-   int  swaps = currentMinIndex;
-    swaps+=nums.length-currentMaxIndex-1;
+   int  swaps = currentMinIndex-1;
+    swaps+=nums.length-currentMaxIndex;
     if(currentMinIndex>currentMaxIndex){
         swaps-=1;
     }
