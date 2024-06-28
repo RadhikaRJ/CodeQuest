@@ -1,29 +1,32 @@
 class Solution {
     public int minimumSwaps(int[] nums) {
-     //  [3,4,5,5,3,1 ]
-     //  [0,1,2,3,4,5 ]
-     //  [1,3,4,5,3,5 ]
-
-    int maxPosition = nums.length-1, minPosition = 0;
-    int currentMaxIndex = 0, currentMinIndex = 0;
-    int totalSwaps = 0;
-    for(int i=0;i<nums.length;i++){
-        if(nums[currentMaxIndex]<=nums[i]){
-            currentMaxIndex = i;
+        
+        int n = nums.length;
+        if(n==1){
+            return 0;
         }
-        if(nums[currentMinIndex]>nums[i]){
-            currentMinIndex = i;
+        int indexOfSmallestNum = 0;
+        int indexOfLargestNum =0;
+
+        int maxNumber = Integer.MIN_VALUE;
+        int minNumber = Integer.MAX_VALUE;
+
+        for(int i=0;i<nums.length;i++){
+            if(maxNumber<=nums[i]){
+                indexOfLargestNum = i;
+                maxNumber = nums[i];
+            }
+            if(minNumber>=nums[i]){
+                indexOfSmallestNum = i;
+                minNumber = nums[i];
+            }
         }
-    }
 
-   int  swaps = currentMinIndex-1;
-    swaps+=nums.length-currentMaxIndex;
-    if(currentMinIndex>currentMaxIndex){
-        swaps-=1;
-    }
+        int minSwapsLargestToRight = n-indexOfLargestNum;
+        int minSwapsSmallestToLeft= indexOfSmallestNum-1;
+        int totalSwaps = minSwapsLargestToRight+minSwapsSmallestToLeft;
+       
 
-    return swaps;
-
-
+        return indexOfSmallestNum>indexOfLargestNum ? totalSwaps-1:totalSwaps;
     }
 }
